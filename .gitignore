@@ -1,0 +1,17 @@
+/source/*
+!/source/.gitkeep
+/references/generated/
+/references/.generated-*/
+*.pdf
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+/tmp/
+/local/
+
+
+# Credentials and machine-local settings
+.env
+.env.*
+!.env.example
