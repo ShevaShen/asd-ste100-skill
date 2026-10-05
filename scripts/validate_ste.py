@@ -13,6 +13,7 @@ CONTRACTIONS = re.compile(
     r"i'm|you're|we're|they're|i've|you've|we've|they've|i'll|you'll|he'll|she'll|we'll|they'll)\b",
     re.IGNORECASE)
 TOKEN = re.compile(r"\w+(?:[-’'./]\w+)*", re.UNICODE)
+LIST_MARKER = re.compile(r'^[ \t]*(?:[-*+•]|\d+[.)]|[A-Za-z][.)]|\((?:\d+|[A-Za-z])\))[ \t]+', re.MULTILINE)
 
 
 def mask_quotes(text):
@@ -36,30 +37,74 @@ def word_count(text, count_as_one=()):
     return len(TOKEN.findall(text))
 
 
-def sentence_spans(text):
-    """Candidate boundaries, with quotes, decimals and common abbreviations protected."""
+def _layout(text):
+    """Find explicit list/paragraph boundaries without changing original offsets."""
     masked = list(mask_quotes(text))
+    depths = []
+    depth = 0
+    # Read the quote-masked characters: parentheses inside a fixed label do not
+    # change the surrounding text's depth.
+    for i, c in enumerate(masked):
+        depths.append(depth)
+        if c == '(':
+            depth += 1
+        if depth and c in '.!?:':
+            masked[i] = 'x'
+        if c == ')':
+            depth = max(0, depth - 1)
+    visible = ''.join(masked)
+    boundaries = {0, len(text)}
+    for match in re.finditer(r'\n[ \t\r]*\n', text):
+        if depths[match.start()] == 0:
+            boundaries.update((match.start(), match.end()))
+    for marker in LIST_MARKER.finditer(visible):
+        if depths[marker.start()] != 0:
+            continue
+        boundaries.add(marker.start())
+        # A marker's numbering is not a sentence or part of its word count.
+        for i in range(marker.start(), marker.end()):
+            if masked[i] == '.':
+                masked[i] = 'x'
+        # A colon is a counting boundary only when it introduces a marked
+        # vertical list. Inline colons and colons in labels are not split.
+        colon = re.search(r':\s*$', text[:marker.start()])
+        if colon and visible[colon.start()] == ':':
+            boundaries.add(colon.start() + 1)
+    return masked, boundaries
+
+
+def _spans(text, boundaries):
+    positions = sorted(boundaries)
+    for start, end in zip(positions, positions[1:]):
+        while start < end and text[start].isspace():
+            start += 1
+        while end > start and text[end - 1].isspace():
+            end -= 1
+        if start < end:
+            yield start, end
+
+
+def paragraph_spans(text):
+    """Treat marked list items as separate units, not one six-sentence paragraph."""
+    _, boundaries = _layout(text)
+    yield from _spans(text, boundaries)
+
+
+def sentence_spans(text):
+    """Count marked list items separately; keep unmarked wrapped lines together.
+
+    Returns half-open offsets in the original text, including any list marker.
+    Unmarked lists and ambiguous layouts still need contextual review.
+    """
+    masked, boundaries = _layout(text)
     for m in re.finditer(r'\b(?:a\.m\.|p\.m\.|e\.g\.|i\.e\.|No\.|Mr\.|Dr\.)|(?<=\d)\.(?=\d)', text, re.I):
         for i in range(m.start(), m.end()):
             if masked[i] == '.':
                 masked[i] = 'x'
-    depth = 0
-    for i, c in enumerate(text):
-        if c == '(':
-            depth += 1
-        if depth and masked[i] in '.!?':
-            masked[i] = 'x'
-        if c == ')':
-            depth = max(0, depth - 1)
     split_text = ''.join(masked)
-    start = 0
-    for m in re.finditer(r'[.!?](?=\s|$)|\n\s*\n', split_text):
-        end = m.end()
-        if text[start:end].strip():
-            yield start, end
-        start = end
-    if text[start:].strip():
-        yield start, len(text)
+    for match in re.finditer(r'[.!?](?=\s|$)', split_text):
+        boundaries.add(match.end())
+    yield from _spans(text, boundaries)
 
 
 def validate(text, kind, store, count_as_one=()):
@@ -83,8 +128,8 @@ def validate(text, kind, store, count_as_one=()):
     spans = list(sentence_spans(text))
     for start, end in spans:
         sentence = text[start:end]
-        # Work-step numbers are not words; other number contexts remain intact.
-        sentence = re.sub(r'^\s*(?:\d+[.)]|\(\d+\))\s+', '', sentence)
+        # Strip only the leading marker, retaining the original finding span.
+        sentence = LIST_MARKER.sub('', sentence, count=1)
         count = word_count(sentence, count_as_one)
         if count > limit:
             add(rule, start, end, 'Estimated sentence length exceeds the limit; verify boundaries and special count elements.',
@@ -99,10 +144,10 @@ def validate(text, kind, store, count_as_one=()):
                     'Estimated parenthetical sentence length exceeds the limit.', 'review',
                     estimated_words=count, limit=limit, counting_evidence=[store.evidence('8.5')])
     if kind == 'descriptive':
-        for paragraph in re.finditer(r'\S[\s\S]*?(?=\n\s*\n|\Z)', text):
-            count = len(list(sentence_spans(paragraph[0])))
+        for start, end in paragraph_spans(text):
+            count = len(list(sentence_spans(text[start:end])))
             if count > 6:
-                add('6.6', paragraph.start(), paragraph.end(),
+                add('6.6', start, end,
                     'Estimated paragraph size exceeds six sentences; verify segmentation.',
                     'review', estimated_sentences=count)
     return {'operation': 'VALIDATE', 'issue': 9, 'type': kind,
@@ -116,8 +161,8 @@ def validate(text, kind, store, count_as_one=()):
                                         'instruction structure and safety meaning',
                                         'all other rules and recommendations']},
             'limitations': ['Quotes are only syntax-detected; confirm that they are protected source text.',
-                            'Counts are estimates: lists, titles, names, labels, number expressions and abbreviations need review.',
-                            'Plain text input only; markup and code need a separate contextual review.'],
+                            'Counts are estimates: unmarked or ambiguous lists, titles, names, labels, number expressions and abbreviations need review.',
+                            'Plain text and explicit bullet/number/letter lists only; other markup and code need contextual review.'],
             'count_as_one': list(count_as_one)}
 
 

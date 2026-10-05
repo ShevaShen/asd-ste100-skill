@@ -80,3 +80,12 @@ text. Sentence-length and paragraph-size findings are review candidates. Word
 counting handles several explicit patterns, but plain text cannot reliably
 identify every title, name, label, abbreviation, number expression, or list.
 No output from the checker certifies full ASD-STE100 compliance.
+
+The optional validator recognizes explicit bullet, number, and letter list markers.
+A colon immediately before a marked vertical list ends the introductory counting
+unit. Each marked item starts a new unit; an unmarked wrapped line remains part
+of that item. List markers do not add words. Blank lines separate paragraphs,
+and marked list items are separate units for paragraph-size review. Inline
+colons, quoted punctuation, and punctuation inside parentheses do not create
+spurious outer boundaries. Findings retain offsets into the unchanged input.
+Unmarked lists and layouts without clear paragraph boundaries remain uncertain.

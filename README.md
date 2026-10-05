@@ -36,6 +36,55 @@ procedures, descriptions, safety instructions, punctuation, counting conventions
 and consistency. It includes important exceptions and separates numbered rules
 from additional recommendations.
 
+## Original examples
+
+These examples illustrate behavior, not certified dictionary compliance.
+
+### Rewrite while preserving the condition
+
+**NORMALIZE input**
+
+> If the status is green, you must press the “Start cycle” button and then record the batch ID.
+
+**Example output**
+
+> If the status is green:
+>
+> 1. Press the “Start cycle” button.
+> 2. Record the batch ID.
+
+Both actions remain conditional and mandatory, their order is preserved, and the
+interface label is unchanged. Recommendations require different treatment:
+“should” must not silently become “must” or an unconditional command.
+
+### Validate without rewriting
+
+**VALIDATE-only input**
+
+> Don't open the panel; record the serial number.
+
+**Example report**
+
+- “Don't”: contraction in authored text (4.2).
+- “;”: semicolon in authored text (8.1).
+- Two instructions share one sentence without a simultaneous-action condition (5.2).
+- Full dictionary compliance was not assessed.
+
+The report assesses the supplied text. It does not supply a corrected procedure.
+
+### Ask before resolving an ambiguous reference
+
+**NORMALIZE input**
+
+> Before you replace it, disconnect the sensor from the controller.
+
+**Example response**
+
+> Does “it” refer to the sensor or the controller?
+
+A definitive rewrite would require choosing which component is replaced. The
+assistant asks rather than inventing that meaning.
+
 ## Limits
 
 The complete official dictionary is **not included**. Approval of a word depends
@@ -82,6 +131,18 @@ for extraction assumptions and limitations.
 
 ## Development checks
 
+### Skill behavior
+
+[Behavioral cases](evals/cases.json) cover recommendations versus requirements,
+unknown actors, conditional instructions, fixed labels, VALIDATE-only requests,
+and clarification. They specify meaning-preservation criteria rather than one
+required answer string. See the [evaluation procedure and recorded results](evals/README.md).
+
+These evaluations exercise an assistant using the actual `SKILL.md`. They are
+separate from the Python tests and are not a full compliance benchmark.
+
+### Optional Python tools
+
 The regular test suite uses the Python standard library and synthetic examples:
 
 ```sh
@@ -97,6 +158,11 @@ STE_INTEGRATION=1 python3 -m unittest discover -s tests -v
 These tests cover the optional tools and reference handling. They do not establish
 that an AI assistant's output satisfies every writing or vocabulary requirement.
 Contributions should use original examples and preserve the self-contained runtime.
+
+The optional validator recognizes marked vertical lists, including bullets and
+numbered or lettered items. It counts introductory clauses and items separately,
+keeps wrapped continuations together, and preserves original finding offsets.
+Unmarked lists and ambiguous layouts still require contextual review.
 
 ## License and attribution
 

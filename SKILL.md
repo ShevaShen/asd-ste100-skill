@@ -146,12 +146,12 @@ already clear short terms.
 
 ## Sentence construction — rules 4.1–4.5
 
-Make sentences short and unambiguous. Keep necessary grammar and information:
-do not omit required words or use contractions to reduce length. Use articles
-or demonstrative adjectives before nouns where applicable.
+Make sentences short and unambiguous (4.1). Keep necessary grammar and information:
+do not omit required words or use contractions to reduce length (4.2). Use articles
+or demonstrative adjectives before nouns where applicable (4.5).
 
-Use vertical lists when they make complex information easier to understand.
-Connect related statements with explicit connecting words or phrases. Splitting
+Use vertical lists when they make complex information easier to understand (4.3).
+Connect related statements with explicit connecting words or phrases (4.4). Splitting
 a sentence must not remove its condition, cause, exception, or logical connection.
 
 ## Procedures — rules 5.1–5.5
@@ -190,8 +190,8 @@ must not be hidden in a note or removed merely to shorten a sentence.
 
 ## Punctuation and counting — rules 8.1–8.7
 
-Do not use semicolons in authored STE sentences. Use separate sentences instead.
-Use standard punctuation accurately and hyphens only for genuinely related words.
+Do not use semicolons in authored STE sentences. Use separate sentences instead (8.1).
+Use standard punctuation accurately and hyphens only for genuinely related words (8.2).
 
 Parentheses can contain references, identifiers, step designations, abbreviations,
 singular/plural notation, explanations, and alternatives (8.3).
@@ -250,7 +250,8 @@ a change in technical requirements.
 
 For NORMALIZE, deliver the usable revision without an unsolicited rule-by-rule
 audit. For VALIDATE, report only supported findings and material uncertainties.
-Use the rule IDs in this skill. Never claim that every rule or dictionary entry
+Use the specific rule ID identified here for each finding, rather than a whole
+section's range. Never claim that every rule or dictionary entry
 was checked when working from this distillation.
 
 ## Build-time provenance

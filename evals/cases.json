@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "description": "Original behavioral evaluations. Grade meaning and requested operation, not exact wording.",
+  "cases": [
+    {
+      "id": "should-versus-must",
+      "prompt": "NORMALIZE this descriptive policy text: Operators should save a copy before they update the package. Operators must record the installed version.",
+      "invariants": ["Saving a copy remains a recommendation, not a requirement.", "Recording the installed version remains mandatory.", "The recommendation to save a copy still applies before the update."],
+      "failure_examples": ["Changes should to must or an unqualified command.", "Changes must to should, may, or can.", "Removes or reverses the temporal condition."]
+    },
+    {
+      "id": "unknown-actor",
+      "prompt": "NORMALIZE this incident description: The log was deleted during the update. The available evidence does not identify who or what deleted it.",
+      "invariants": ["The deletion remains a reported event during the update.", "The actor remains unknown.", "The update is not presented as the cause merely because it coincided with the deletion."],
+      "failure_examples": ["Invents an operator, administrator, software process, or other actor.", "Changes during to because of.", "Rejects passive voice despite the explicitly unknown actor."]
+    },
+    {
+      "id": "conditional-instruction",
+      "prompt": "NORMALIZE this procedure: Open valve V-2 only if the pressure is less than 4 kPa and the indicator is green.",
+      "invariants": ["Both conditions remain necessary before opening the valve.", "The pressure comparison remains strictly less than 4 kPa.", "The valve identifier and indicator color remain unchanged."],
+      "failure_examples": ["Changes and to or.", "Changes less than to at most or less than or equal to.", "Gives an unconditional command followed by the conditions."]
+    },
+    {
+      "id": "fixed-labels",
+      "prompt": "NORMALIZE this procedure. The quoted strings are exact interface labels: Press the “DON'T RESET; HOLD” button after the display shows “Colour check complete”.",
+      "invariants": ["Preserves the exact label DON'T RESET; HOLD, including its apostrophe and semicolon.", "Preserves the exact label Colour check complete, including British spelling and capitalization.", "The display message must precede pressing the button."],
+      "failure_examples": ["Expands DON'T inside the label.", "Removes the semicolon inside the label.", "Changes Colour to Color.", "Reverses the condition and action."]
+    },
+    {
+      "id": "validate-only",
+      "prompt": "VALIDATE only. Do not rewrite the text or provide a corrected version. Review this procedure: Don't open the panel; record the serial number.",
+      "invariants": ["Reports findings without supplying a rewritten or corrected procedure.", "Identifies the contraction and the semicolon with applicable rule IDs 4.2 and 8.1.", "Does not claim full dictionary compliance was assessed."],
+      "failure_examples": ["Returns a revised procedure, even after a valid report.", "Labels all words approved without supporting evidence.", "Claims full compliance or certification."]
+    },
+    {
+      "id": "clarification-needed",
+      "prompt": "NORMALIZE this procedure: Before you replace it, disconnect the sensor from the controller.",
+      "invariants": ["Recognizes that it can refer to the sensor or the controller.", "Asks which component is to be replaced before choosing a definitive rewrite.", "Preserves the required ordering of disconnection before replacement."],
+      "failure_examples": ["Silently chooses the sensor or controller.", "Deletes the replacement condition to remove the ambiguity.", "Presents an assumed interpretation as the final revision."]
+    }
+  ]
+}

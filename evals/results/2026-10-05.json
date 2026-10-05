@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "cases_sha256": "23b507ccab7ac128fae7fb15463ac7d1d11e83cf39b8f8c39c37faa5262b27d0",
+  "execution": {
+    "respondent": "independent Codex subagent; new context per run",
+    "model": null,
+    "sampling_settings": null,
+    "rubric_visible_to_respondent": false,
+    "cases_batched_in_one_context": true,
+    "tools_after_skill_load": false,
+    "reviewer": "primary Codex agent; semantic review, not human expert review"
+  },
+  "limitations": [
+    "One batched run per skill version.",
+    "Cases within a run share context.",
+    "Exact model version and sampling settings were not exposed.",
+    "Passing cases does not certify STE compliance."
+  ],
+  "change": "Added specific IDs for sentence and punctuation guidance and required finding-level rule citations.",
+  "runs": [
+    {
+      "id": "baseline",
+      "skill_sha256": "49756f1257083c213291e9b24948091a24d6db6775d696716e71de70f959dade",
+      "results": [
+        {
+          "case_id": "should-versus-must",
+          "response": "Operators should save a copy before they update the package. Operators must record the installed version.",
+          "review": {
+            "status": "pass",
+            "reason": "Retains should for the recommended copy, must for recording, and before for timing."
+          }
+        },
+        {
+          "case_id": "unknown-actor",
+          "response": "The log was deleted during the update. The available evidence does not identify who or what deleted it.",
+          "review": {
+            "status": "pass",
+            "reason": "Retains the deletion event and unknown actor; does not turn temporal coincidence into causation."
+          }
+        },
+        {
+          "case_id": "conditional-instruction",
+          "response": "Only if the pressure is less than 4 kPa and the indicator is green, open valve V-2.",
+          "review": {
+            "status": "pass",
+            "reason": "Retains only if, both conditions joined by and, strict less-than comparison, 4 kPa, V-2, and green."
+          }
+        },
+        {
+          "case_id": "fixed-labels",
+          "response": "After the display shows “Colour check complete”, press the “DON'T RESET; HOLD” button.",
+          "review": {
+            "status": "pass",
+            "reason": "Both label strings are preserved exactly, and the display message still precedes the action."
+          }
+        },
+        {
+          "case_id": "validate-only",
+          "response": "STE-guided review found three clear writing-rule violations:\n\n- “Don't” is a contraction (rules 4.1–4.5).\n- The semicolon is not permitted in an authored STE sentence (rules 8.1–8.7).\n- The sentence contains two instructions without indicating simultaneous actions (rule 5.2).\n\nFull dictionary compliance was not assessed.",
+          "review": {
+            "status": "fail",
+            "reason": "Preserves VALIDATE-only scope and discloses the dictionary boundary, but uses ranges 4.1–4.5 and 8.1–8.7 instead of specific IDs 4.2 and 8.1."
+          }
+        },
+        {
+          "case_id": "clarification-needed",
+          "response": "Does “it” refer to the sensor or the controller?",
+          "review": {
+            "status": "pass",
+            "reason": "Asks which component it denotes and does not supply an assumed rewrite or change the ordering."
+          }
+        }
+      ],
+      "passed": 5,
+      "total": 6
+    },
+    {
+      "id": "precise-rule-citations",
+      "skill_sha256": "65970c8096f518f4758eb4199356c41ec520297208867bdecebda424bb9e8136",
+      "results": [
+        {
+          "case_id": "should-versus-must",
+          "response": ":::writing{variant=\"standard\" id=\"71301\"}\nOperators should save a copy before they update the package. Operators must record the installed version.\n:::",
+          "review": {
+            "status": "pass",
+            "reason": "Retains should for the recommended copy, must for recording, and before for timing."
+          }
+        },
+        {
+          "case_id": "unknown-actor",
+          "response": ":::writing{variant=\"standard\" id=\"71302\"}\nThe log was deleted during the update. The available evidence does not identify who or what deleted it.\n:::",
+          "review": {
+            "status": "pass",
+            "reason": "Retains the deletion event and unknown actor; does not turn temporal coincidence into causation."
+          }
+        },
+        {
+          "case_id": "conditional-instruction",
+          "response": ":::writing{variant=\"standard\" id=\"71303\"}\nOnly if the pressure is less than 4 kPa and the indicator is green, open valve V-2.\n:::",
+          "review": {
+            "status": "pass",
+            "reason": "Retains only if, both conditions joined by and, strict less-than comparison, 4 kPa, V-2, and green."
+          }
+        },
+        {
+          "case_id": "fixed-labels",
+          "response": ":::writing{variant=\"standard\" id=\"71304\"}\nAfter the display shows “Colour check complete”, press the “DON'T RESET; HOLD” button.\n:::",
+          "review": {
+            "status": "pass",
+            "reason": "Both label strings are preserved exactly, and the display message still precedes the action."
+          }
+        },
+        {
+          "case_id": "validate-only",
+          "response": "STE-guided validation found three writing-rule violations:\n\n- “Don't” is a contraction (rule 4.2).\n- The semicolon is not permitted in authored sentences (rule 8.1).\n- “Don't open the panel; record the serial number” contains two instructions in one sentence without an indicated simultaneous relationship (rule 5.2).\n\nFull dictionary compliance was not assessed.",
+          "review": {
+            "status": "pass",
+            "reason": "Reports findings without a corrected procedure, cites 4.2 and 8.1 precisely, and discloses unassessed dictionary compliance."
+          }
+        },
+        {
+          "case_id": "clarification-needed",
+          "response": "Does “it” refer to the sensor or the controller?",
+          "review": {
+            "status": "pass",
+            "reason": "Asks which component it denotes and does not supply an assumed rewrite or change the ordering."
+          }
+        }
+      ],
+      "passed": 6,
+      "total": 6
+    }
+  ]
+}
