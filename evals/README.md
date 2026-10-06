@@ -51,6 +51,45 @@ approval, or compliance with every requirement of the standard.
 
 ## Recorded evaluations
 
+### Complete ten-case regression — 2026-10-06
+
+The [full regression record](results/2026-10-06-full-regression.json) covers
+**all ten cases, each run twice in a fresh context: 20 responses from 20 contexts**.
+Both repetitions passed every case's stated invariants in the primary assistant's
+semantic review. No responses were discarded, and neither the skill nor the
+criteria changed during the evaluation.
+
+The tested revision is [d6915e9](https://github.com/ShevaShen/asd-ste100-skill/commit/d6915e9a494f9195b4987f86661c875d36aef7ec),
+with skill SHA-256
+`a2cca8fc98faf927a4b8439c392ec9f766276e58488a257162532352254d89a9`.
+This includes the recommendation-classification correction and reruns the eight
+older cases that the earlier focused follow-up did not cover.
+
+| Case | Repetition A | Repetition B |
+| --- | --- | --- |
+| `should-versus-must` | Pass | Pass |
+| `unknown-actor` | Pass | Pass |
+| `conditional-instruction` | Pass | Pass |
+| `fixed-labels` | Pass | Pass |
+| `validate-only` | Pass | Pass |
+| `clarification-needed` | Pass | Pass |
+| `description-rule-ids` | Pass | Pass |
+| `safety-rule-ids` | Pass | Pass |
+| `validate-advice-permission` | Pass | Pass |
+| `validate-required-should` | Pass | Pass |
+
+The record retains every exact response, its hash, prompt and case hashes,
+responding-context identifiers, and review reasons. Respondents saw only the
+frozen skill and their own prompt, without grading criteria or previous outputs.
+They used no retrieval or tools during composition; a tool saved each completed
+response afterward.
+
+**Limits remain:** exact model/version and sampling settings were not exposed
+and are recorded as null. Grading is assistant-only, with no human expert
+assessment or deliberate cross-model comparison. Fresh contexts do not make model
+errors statistically independent. These small cases test specific invariants;
+they do not certify STE compliance or establish reliability on longer documents.
+
 ### Recommendation classification follow-up — 2026-10-06
 
 The [focused follow-up report](results/2026-10-06-recommendations.json) records

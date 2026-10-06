@@ -190,6 +190,11 @@ unknown actors, conditional instructions, fixed labels, VALIDATE-only requests,
 clarification, and individual description/safety rule citations. They specify meaning-preservation criteria rather than one
 required answer string. See the [evaluation procedure and recorded results](evals/README.md).
 
+The [complete 2026-10-06 regression](evals/results/2026-10-06-full-regression.json)
+ran all ten cases twice against the recommendation-classification revision:
+**20/20 responses passed their stated criteria**, each in a fresh context.
+Exact model/settings remain unavailable, and grading is assistant-only.
+
 These evaluations exercise an assistant using the actual `SKILL.md`. They are
 separate from the Python tests and are not a full compliance benchmark.
 

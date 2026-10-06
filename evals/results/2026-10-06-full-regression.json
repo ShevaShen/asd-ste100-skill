@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-06",
+  "source_commit": "d6915e9a494f9195b4987f86661c875d36aef7ec",
+  "skill_sha256": "a2cca8fc98faf927a4b8439c392ec9f766276e58488a257162532352254d89a9",
+  "cases_sha256": "9981409e5a0d775cb3161079e824388b7c8537f8c24dcfb739cc19cd2de8689e",
+  "scope": "Complete ten-case catalog, two repetitions per case, all against the unchanged recommendation-classification revision.",
+  "execution": {
+    "respondent": "Independent Codex subagent; fresh context for every case and repetition",
+    "model": null,
+    "model_version": null,
+    "sampling_settings": null,
+    "metadata_note": "Exact backend model/version and sampling settings were not exposed. No overrides were requested.",
+    "rubric_visible_to_respondent": false,
+    "cases_batched_in_one_context": false,
+    "tools_during_composition": false,
+    "response_persistence": "A file-writing tool saved each exact completed response after composition.",
+    "reviewer": "Primary Codex agent; assistant-only semantic review, not a human expert assessment.",
+    "responses_discarded": 0
+  },
+  "limitations": [
+    "Two repetitions per case in one execution environment; no deliberate cross-model comparison.",
+    "Fresh contexts do not make model errors statistically independent.",
+    "Exact backend model/version and sampling settings remain unavailable.",
+    "Grading is assistant-only; no independent human assessment is claimed.",
+    "Passing these stated invariants does not establish exhaustive STE compliance, dictionary approval, or reliability on longer documents."
+  ],
+  "runs": [
+    {
+      "id": "full-catalog-repetition-a",
+      "results": [
+        {
+          "case_id": "should-versus-must",
+          "respondent": "/root/full01a",
+          "prompt_sha256": "d40f8373eab5020af222760185fad8b56744290297aa1f9a42e35c347902c0c9",
+          "response": ":::writing{variant=\"document\" id=\"71390\"}\nOperators should save a copy before they update the package. Operators must record the installed version.\n:::\n",
+          "response_sha256": "9a21bc09f8280a6a02b947b9eb1ea4be0e37545f157d1dff91f7dd6229b298d3",
+          "review": {
+            "status": "pass",
+            "reason": "Retains should for the recommended copy, must for recording, and the before-update condition; no obligation is strengthened or weakened."
+          }
+        },
+        {
+          "case_id": "unknown-actor",
+          "respondent": "/root/full02a",
+          "prompt_sha256": "369eb000d722f4606106b65b422e5309ac43abe3dcb6864f22ef0d882c1a7111",
+          "response": ":::writing{variant=\"standard\" id=\"20371\"}\nThe log was deleted during the update. The available evidence does not identify who or what deleted the log.\n:::\n",
+          "response_sha256": "ebceca6562fc570f7fbdb10972fe0f2e94efdc9f3c0e23f6abf4302f6eb08ad7",
+          "review": {
+            "status": "pass",
+            "reason": "Retains the deletion during the update and the unknown actor. Repeats log for clarity without inventing an actor or asserting causation."
+          }
+        },
+        {
+          "case_id": "conditional-instruction",
+          "respondent": "/root/full03a",
+          "prompt_sha256": "0debb987fb635157eaadd3eae67d3edd7748edf847bc65298db4afd0a207d58a",
+          "response": ":::writing{variant=\"standard\" id=\"73182\"}\nOnly if the pressure is less than 4 kPa and the indicator is green, open valve V-2.\n:::\n",
+          "response_sha256": "799d89044e7341cca7a9c80971589a8b37480d92e4114c556c6c7539398fd015",
+          "review": {
+            "status": "pass",
+            "reason": "Preserves both conditions before the command, joined by and, with strict less than 4 kPa, valve V-2, and green unchanged."
+          }
+        },
+        {
+          "case_id": "fixed-labels",
+          "respondent": "/root/full04a",
+          "prompt_sha256": "d4105a3b90e2c5c1b35ad335d3665d691dbb363865a273baeb256310adcdd4c9",
+          "response": "After the display shows \u201cColour check complete\u201d, press the \u201cDON'T RESET; HOLD\u201d button.\n",
+          "response_sha256": "668eaccc3351b9ef34f703b6ef674522a6316a4be8416738049a36495415c351",
+          "review": {
+            "status": "pass",
+            "reason": "Preserves both interface strings exactly, including the apostrophe, semicolon, Colour spelling and capitalization. The display message still precedes pressing the button."
+          }
+        },
+        {
+          "case_id": "validate-only",
+          "respondent": "/root/full05a",
+          "prompt_sha256": "803cbb259e437d2d3c70e3cb0916c7b162a6f62afb77d280ee6be9a338d7f298",
+          "response": "STE-guided validation found three writing-rule violations:\n\n- **Rule 4.2:** \u201cDon't\u201d is a contraction.\n- **Rule 8.1:** The semicolon in \u201cpanel; record\u201d is not permitted.\n- **Rule 5.2:** The sentence contains two instructions: \u201cDon't open the panel\u201d and \u201crecord the serial number.\u201d The text does not establish simultaneous actions that qualify for the exception.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "b8b8fb41529e7ce761f52c3b66023e663065711fca5cb3b7bf89ca27c1aa8988",
+          "review": {
+            "status": "pass",
+            "reason": "Provides findings only, cites contraction rule 4.2 and semicolon rule 8.1 precisely, and discloses unassessed dictionary compliance; no corrected procedure is supplied."
+          }
+        },
+        {
+          "case_id": "clarification-needed",
+          "respondent": "/root/full06a",
+          "prompt_sha256": "175c62d002c5851f4fce30701788608fca93bd341e00a3e1065da25e2e9e5fe9",
+          "response": "What does \u201cit\u201d refer to: the sensor, the controller, or another component?\n",
+          "response_sha256": "4ef9286164ab732fdbb78d790f695eb0e47858663f185701fe652965b78c9a01",
+          "review": {
+            "status": "pass",
+            "reason": "Asks whether it denotes the sensor, controller, or another component. Does not choose a component, issue a definitive rewrite, or change the required ordering."
+          }
+        },
+        {
+          "case_id": "description-rule-ids",
+          "respondent": "/root/full07a",
+          "prompt_sha256": "7be2bbe827f1e5856feda05269c76315d18b6966bc1dd98777eaaf40d8ee1204",
+          "response": "STE-guided validation found two paragraph issues:\n\n- **Rule 6.5:** The paragraph contains two topics: archive records (sentences 1\u20133) and reception lighting (sentences 4\u20137). \u201cThe reception lights use a separate circuit\u201d introduces the second topic. These topics need separate paragraphs.\n- **Rule 6.6:** The paragraph contains **seven sentences**, which exceeds the limit of six sentences per paragraph.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "fbe62e2f26635055b3f3f3de364d54b2f5e3e8b4b757cc8f651f0e4b41255f97",
+          "review": {
+            "status": "pass",
+            "reason": "Identifies archive and lighting as separate topics under 6.5 and seven sentences under 6.6. Supplies no rewritten paragraph or invented relationship and discloses the dictionary boundary."
+          }
+        },
+        {
+          "case_id": "safety-rule-ids",
+          "respondent": "/root/full08a",
+          "prompt_sha256": "9aecea662d08effd1d065d1385e6565e19ed41ce1bd8e820aacf69961d4157bd",
+          "response": "STE-guided validation found three safety-writing violations:\n\n- **Rule 7.1:** The instruction lacks **CAUTION**, the risk identifier required by the supplied governing convention.\n- **Rule 7.2:** \u201cThe window needs attention.\u201d does not begin the safety instruction with a clear command or a condition the reader must understand first.\n- **Rule 7.3:** \u201cWipe the window with the specified soft cloth.\u201d omits the supplied hazard explanation: an abrasive cloth can scratch the optical window.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "72123dd13bbd9423e55287b04b1c8e2b62095c1e4ce519a43027d41650394d0c",
+          "review": {
+            "status": "pass",
+            "reason": "Cites 7.1, 7.2 and 7.3 individually for the missing CAUTION identifier, opening and consequence. Retains the supplied equipment-damage risk without inventing injury; no rewrite or compliance claim."
+          }
+        },
+        {
+          "case_id": "validate-advice-permission",
+          "respondent": "/root/full09a",
+          "prompt_sha256": "66a918c78fdcecf2adeafb1ceb75820fb1071a6f8d701ddababd8512f2184171",
+          "response": "STE-guided validation found one clear writing-rule violation:\n\n- **Rule 5.3:** \u201cThe analyst must update the request record.\u201d is a mandatory procedural instruction but does not use the imperative.\n\nThe screenshot sentence expresses optional advice. The ticket-closing sentence expresses permission. Their non-imperative forms do not establish violations of rule 5.3.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "512726ffc90fb4d966a88e07223c575a32b73966a258a4bc5241a8b760289d9c",
+          "review": {
+            "status": "pass",
+            "reason": "Distinguishes optional screenshot advice and ticket-closing permission from the mandatory record update, citing only the latter under 5.3. Does not contradict or remove approval, rewrite the procedure, or claim dictionary verification."
+          }
+        },
+        {
+          "case_id": "validate-required-should",
+          "respondent": "/root/full10a",
+          "prompt_sha256": "1ac1d8624e08bd7ac75c9fe6829d3ad79ac75e41ad3695a9d477d16bcdedc039",
+          "response": "STE-guided validation found one clear writing-rule violation:\n\n- **Rule 5.3 \u2014 Imperative instructions:** \u201cThe operator should confirm\u2026\u201d is not imperative. Your context establishes that this is a mandatory requirement, so the instruction must use the imperative.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "1b08ce2351f3df92606c2dff2b39ecaceb054fdccde8d2bc0f402b4e621f46c3",
+          "review": {
+            "status": "pass",
+            "reason": "Uses the supplied mandatory meaning of should and cites 5.3 for the operator instruction. Does not recast the action or timing as optional, supply a rewrite, or claim dictionary verification."
+          }
+        }
+      ],
+      "passed": 10,
+      "total": 10
+    },
+    {
+      "id": "full-catalog-repetition-b",
+      "results": [
+        {
+          "case_id": "should-versus-must",
+          "respondent": "/root/full01b",
+          "prompt_sha256": "d40f8373eab5020af222760185fad8b56744290297aa1f9a42e35c347902c0c9",
+          "response": ":::writing{variant=\"standard\" id=\"61482\"}\nOperators should save a copy before they update the package. Operators must record the installed version.\n:::\n",
+          "response_sha256": "b120cd41871188217a59f45248a1d01a5ec48973ee82f46edc7d3bc3398d40ab",
+          "review": {
+            "status": "pass",
+            "reason": "Retains should for the recommended copy, must for recording, and the before-update condition; no obligation is strengthened or weakened."
+          }
+        },
+        {
+          "case_id": "unknown-actor",
+          "respondent": "/root/full02b",
+          "prompt_sha256": "369eb000d722f4606106b65b422e5309ac43abe3dcb6864f22ef0d882c1a7111",
+          "response": ":::writing{variant=\"standard\" id=\"73026\"}\nThe log was deleted during the update. The available evidence does not identify who or what deleted the log.\n:::\n",
+          "response_sha256": "a4953734d8946068a3fcd12a40394dbccacd51101da9da4b306de896d293f37c",
+          "review": {
+            "status": "pass",
+            "reason": "Retains the deletion during the update and the unknown actor. Repeats log for clarity without inventing an actor or asserting causation."
+          }
+        },
+        {
+          "case_id": "conditional-instruction",
+          "respondent": "/root/full03b",
+          "prompt_sha256": "0debb987fb635157eaadd3eae67d3edd7748edf847bc65298db4afd0a207d58a",
+          "response": ":::writing{variant=\"standard\" id=\"58031\"}\nOnly if the pressure is less than 4 kPa and the indicator is green, open valve V-2.\n:::\n",
+          "response_sha256": "f94be0618fad93c3576de1001cba410e36ff98292ff16161b8eea49b59f63191",
+          "review": {
+            "status": "pass",
+            "reason": "Preserves both conditions before the command, joined by and, with strict less than 4 kPa, valve V-2, and green unchanged."
+          }
+        },
+        {
+          "case_id": "fixed-labels",
+          "respondent": "/root/full04b",
+          "prompt_sha256": "d4105a3b90e2c5c1b35ad335d3665d691dbb363865a273baeb256310adcdd4c9",
+          "response": ":::writing{variant=\"standard\" id=\"90427\"}\nAfter the display shows \u201cColour check complete\u201d, press the \u201cDON'T RESET; HOLD\u201d button.\n:::\n",
+          "response_sha256": "14c0ba297a2c093a09e5ce9e09f1b6ea75b5a5d0aff8eeddd2e1d7c443957cf4",
+          "review": {
+            "status": "pass",
+            "reason": "Preserves both interface strings exactly, including the apostrophe, semicolon, Colour spelling and capitalization. The display message still precedes pressing the button."
+          }
+        },
+        {
+          "case_id": "validate-only",
+          "respondent": "/root/full05b",
+          "prompt_sha256": "803cbb259e437d2d3c70e3cb0916c7b162a6f62afb77d280ee6be9a338d7f298",
+          "response": "STE-guided validation found three writing-rule violations:\n\n- **Rule 4.2:** \u201cDon't\u201d is a contraction.\n- **Rule 8.1:** The semicolon is not permitted.\n- **Rule 5.2:** \u201cDon't open the panel; record the serial number.\u201d combines two instructions in one sentence without establishing simultaneous actions.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "c335698503eed3ab07901481196b80ad1e8906c3c1562fd7a748de9518799bb1",
+          "review": {
+            "status": "pass",
+            "reason": "Provides findings only, cites contraction rule 4.2 and semicolon rule 8.1 precisely, and discloses unassessed dictionary compliance; no corrected procedure is supplied."
+          }
+        },
+        {
+          "case_id": "clarification-needed",
+          "respondent": "/root/full06b",
+          "prompt_sha256": "175c62d002c5851f4fce30701788608fca93bd341e00a3e1065da25e2e9e5fe9",
+          "response": "What does \u201cit\u201d refer to: the sensor, the controller, or another component?\n",
+          "response_sha256": "4ef9286164ab732fdbb78d790f695eb0e47858663f185701fe652965b78c9a01",
+          "review": {
+            "status": "pass",
+            "reason": "Asks whether it denotes the sensor, controller, or another component. Does not choose a component, issue a definitive rewrite, or change the required ordering."
+          }
+        },
+        {
+          "case_id": "description-rule-ids",
+          "respondent": "/root/full07b",
+          "prompt_sha256": "7be2bbe827f1e5856feda05269c76315d18b6966bc1dd98777eaaf40d8ee1204",
+          "response": "STE-guided validation:\n\n- **Rule 6.5 \u2014 One topic per paragraph:** The paragraph mixes archive records with reception lighting. The topic changes at \u201cThe reception lights use a separate circuit.\u201d\n- **Rule 6.6 \u2014 Paragraph sentence limit:** The paragraph contains **seven sentences**, exceeding the limit of six.\n- **Rule 6.3 \u2014 Descriptive sentence length:** Each sentence is within the 25-word limit.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "918400aa843e36ac1222dcc8a4fbb65820c0100a82f7f3f0722f1f7e03ca7a7b",
+          "review": {
+            "status": "pass",
+            "reason": "Identifies archive and lighting as separate topics under 6.5 and seven sentences under 6.6. Supplies no rewritten paragraph or invented relationship and discloses the dictionary boundary."
+          }
+        },
+        {
+          "case_id": "safety-rule-ids",
+          "respondent": "/root/full08b",
+          "prompt_sha256": "9aecea662d08effd1d065d1385e6565e19ed41ce1bd8e820aacf69961d4157bd",
+          "response": "STE-guided validation found three writing-rule violations:\n\n- **7.1 \u2014 Missing risk identifier.** The instruction lacks **CAUTION**, which the governing convention requires for this equipment-damage risk.\n- **7.2 \u2014 Incorrect opening.** \u201cThe window needs attention\u201d is neither a clear command nor a condition the reader must understand first.\n- **7.3 \u2014 Missing hazard explanation.** The instruction does not explain that an abrasive cloth can scratch the optical window.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "fbfe7c8aa82ea069702c923745cb93a9dc813db9f6fcecb863fa49e362e6b617",
+          "review": {
+            "status": "pass",
+            "reason": "Cites 7.1, 7.2 and 7.3 individually for the missing CAUTION identifier, opening and consequence. Retains the supplied equipment-damage risk without inventing injury; no rewrite or compliance claim."
+          }
+        },
+        {
+          "case_id": "validate-advice-permission",
+          "respondent": "/root/full09b",
+          "prompt_sha256": "66a918c78fdcecf2adeafb1ceb75820fb1071a6f8d701ddababd8512f2184171",
+          "response": "STE-guided validation found one clear writing-rule violation:\n\n- **Rule 5.3:** \u201cThe analyst must update the request record.\u201d This is a mandatory procedural instruction, but it does not use the imperative.\n\n\u201cThe analyst should save a screenshot\u201d is optional advice. \u201cThe analyst may close the ticket after approval\u201d expresses permission. Neither is a definite Rule 5.3 violation merely because it is not imperative.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "dea76c7c8e5425da8c8870e6e3977f8c7b61dc7c64aecd9172e690c3e92fdb25",
+          "review": {
+            "status": "pass",
+            "reason": "Distinguishes optional screenshot advice and ticket-closing permission from the mandatory record update, citing only the latter under 5.3. Does not contradict or remove approval, rewrite the procedure, or claim dictionary verification."
+          }
+        },
+        {
+          "case_id": "validate-required-should",
+          "respondent": "/root/full10b",
+          "prompt_sha256": "1ac1d8624e08bd7ac75c9fe6829d3ad79ac75e41ad3695a9d477d16bcdedc039",
+          "response": "STE-guided validation:\n\n- **Rule 5.3 \u2014 Required instruction is not imperative.** \u201cThe operator should confirm\u201d expresses a mandatory action in the supplied context. Required procedural instructions must use the imperative.\n\nFull dictionary compliance was not assessed.\n",
+          "response_sha256": "2e3aa093b5d826aa02a1105d3d126266d7981a5a8a97dcedc26fb6b8a5aee8c3",
+          "review": {
+            "status": "pass",
+            "reason": "Uses the supplied mandatory meaning of should and cites 5.3 for the operator instruction. Does not recast the action or timing as optional, supply a rewrite, or claim dictionary verification."
+          }
+        }
+      ],
+      "passed": 10,
+      "total": 10
+    }
+  ],
+  "summary": {
+    "passed": 20,
+    "total_responses": 20,
+    "distinct_cases": 10,
+    "fresh_contexts": 20
+  }
+}
