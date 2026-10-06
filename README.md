@@ -47,7 +47,7 @@ example includes a real clarification turn and the resulting final procedure.
 | Example | What it exercises | Complete source and response |
 | --- | --- | --- |
 | Configuration deployment | Approvals, optional evidence, verified exports, exact interface labels, acceptance limits, failure handling, and permission to resume service. | [Full NORMALIZE example](examples/normalize-deployment.md) |
-| Service-log export | Description and procedure rules, required material in notes, conflicting timing definitions, approval scope, passive-voice exceptions, and VALIDATE-only behavior. | [Full validation report](examples/validate-export.md) |
+| Service-log export | Description and procedure rules, required material in notes, conflicting timing definitions, approval scope, passive-voice exceptions, and VALIDATE-only behavior. | [Full validation report and follow-up](examples/validate-export-followup.md) |
 | Collector migration | Ambiguous component references, upload versus test failure, rollback scope, window expiry, and mandatory records after an early stop. | [Full clarification exchange](examples/clarify-migration.md) |
 
 ### Deployment: preserve the conditions that make the procedure work
@@ -91,18 +91,21 @@ unchanged, and an incident whose deletion actor is unknown.
 
 **Actual finding under rule 5.5**
 
-> The note contains required checks, a prohibition, and a notification action. The procedure cannot safely omit this note because it controls whether sharing is permitted.
+> The first note requires a Tenant ID comparison before sharing and specifies what to do after a mismatch. Without this note, step 5 permits the analyst to send the link without that comparison.
 
-The [full report](examples/validate-export.md) separates writing findings, meaning
+The [full report](examples/validate-export-followup.md) separates writing findings, meaning
 questions, and vocabulary uncertainty. It asks what starts the ten-minute clock
 and whether three references to approval mean one authorization or several.
 It does not supply a rewritten procedure or invent dictionary approval.
 
-**Known limitation from review:** the actual report labels some “should” wording
-as a definite imperative-form violation before establishing whether it is advice
-or an instruction. The example explicitly corrects that assessment in reviewer
-notes and retains the original model response. It is useful evidence of behavior,
-not a gold-standard report.
+**Observed failure and follow-up:** the initial response labeled some “should”
+wording as a definite imperative-form violation before establishing its force.
+The skill now classifies advice, permission, and requirements before applying
+instruction rules. Two fresh runs of the same export request avoided that
+overstatement, while still identifying mandatory instructions. Four new short
+regression responses also passed their criteria. The [follow-up evidence](examples/validate-export-followup.md)
+preserves the original failure and both new reports. These checks do not establish
+that every other finding or dictionary decision is correct.
 
 ### Clarification: resolve the component and failure path before rewriting
 
@@ -126,8 +129,10 @@ The resulting procedure keeps upload rollback separate from a failed test,
 requires authorization before live delivery, and records the outcome even after
 an early stop. Read the [complete exchange and final procedure](examples/clarify-migration.md).
 
-[Execution metadata](examples/manifest.json) records the skill hash, prompt and
-response hashes, context boundaries, and unavailable model metadata. Responses
+[Initial execution metadata](examples/manifest.json) records the skill hash, prompt and
+response hashes, context boundaries, and unavailable model metadata. The
+[follow-up record](evals/results/2026-10-06-recommendations.json) identifies the
+revised skill and its focused checks. Responses
 were reviewed by the primary assistant, not a human expert. Exact responses are
 retained in [examples/outputs/](examples/outputs/). These are fictional writing
 examples, not validated operating instructions or certified STE.

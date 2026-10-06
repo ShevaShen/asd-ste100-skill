@@ -13,6 +13,8 @@ than testing Python functions. They focus on meaning and operation boundaries:
 | `clarification-needed` | Resolving an ambiguous referent without evidence. |
 | `description-rule-ids` | Reporting paragraph topics and sentence limits without the individual 6.5 and 6.6 IDs. |
 | `safety-rule-ids` | Guessing safety rule IDs or inventing hazard severity. |
+| `validate-advice-permission` | Calling advice or permission a definite imperative-form violation while missing an actual required instruction. |
+| `validate-required-should` | Treating “should” as optional despite an explicit mandatory meaning in the supplied context. |
 
 ## Repeat the evaluation
 
@@ -48,6 +50,26 @@ Passing these cases does not prove universal meaning preservation, dictionary
 approval, or compliance with every requirement of the standard.
 
 ## Recorded evaluations
+
+### Recommendation classification follow-up — 2026-10-06
+
+The [focused follow-up report](results/2026-10-06-recommendations.json) records
+four short responses: two repetitions each of `validate-advice-permission` and
+`validate-required-should`. All four passed their stated invariants. The
+[long export follow-up](../examples/validate-export-followup.md) records two more
+fresh responding contexts using the unchanged export prompt. Both passed the
+seven targeted preservation and classification checks.
+
+The correction prevents advice and permission from becoming definite 5.3
+findings merely because they are not imperative. It still permits a 5.3 finding
+when the context establishes a mandatory instruction, including wording with
+“should”. The old responses and their documented overstatement remain available.
+
+All six runs used separate responding contexts and were reviewed by the primary
+assistant, not a human expert. Model/version and sampling settings were unavailable.
+This focused follow-up did not rerun the eight older cases on the new revision;
+their results below apply to their recorded skill hashes. Passing the targeted
+checks does not validate every finding in the longer reports.
 
 ### Fresh contexts and repeated runs
 

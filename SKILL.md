@@ -168,6 +168,14 @@ a sentence must not remove its condition, cause, exception, or logical connectio
   results in the relevant work steps, and hazard-prevention information in safety
   instructions. The procedure must still work correctly without its notes (5.5).
 
+Application convention: classify a statement as an instruction, requirement,
+recommendation, permission, or description before applying instruction rules.
+The word “should” alone does not establish a mandatory instruction; supplied
+context can establish that meaning. Preserve optional advice and permission.
+In VALIDATE, do not report a definite 5.3 violation solely because advice or
+permission is not imperative. If its force is unclear, report a meaning question.
+This does not exempt the statement from other applicable writing rules.
+
 ## Descriptions — rules 6.1–6.6
 
 - Introduce information gradually (6.1).

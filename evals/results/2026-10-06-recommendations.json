@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-06",
+  "base_commit": "aa387635bfafaaf25f49f2b07adf694c68093987",
+  "skill_sha256": "a2cca8fc98faf927a4b8439c392ec9f766276e58488a257162532352254d89a9",
+  "cases_sha256": "9981409e5a0d775cb3161079e824388b7c8537f8c24dcfb739cc19cd2de8689e",
+  "change": "Add an explicit application convention: classify instruction, requirement, recommendation, permission and description before applying instruction rules. Do not infer a definite 5.3 violation from optional advice or permission; supplied context can establish a mandatory meaning for should.",
+  "execution": {
+    "respondent": "Independent Codex subagent; fresh context for each case and repetition",
+    "model": null,
+    "model_version": null,
+    "sampling_settings": null,
+    "metadata_note": "The subagent interface did not expose exact backend model/version or sampling settings. No overrides were requested.",
+    "rubric_visible_to_respondent": false,
+    "tools_during_composition": false,
+    "response_persistence": "A tool saved each completed response after composition.",
+    "reviewer": "Primary Codex agent; semantic review, not human expert review."
+  },
+  "limitations": [
+    "Focused follow-up: the eight earlier cases were not rerun against this skill revision.",
+    "Two repetitions per new case and two repetitions of the existing longer export scenario.",
+    "The long-response assessment covers the listed targeted invariants, not every sentence count or dictionary entry.",
+    "One model configuration of unavailable identity; passing does not certify compliance."
+  ],
+  "focused_runs": [
+    {
+      "id": "repetition-a",
+      "results": [
+        {
+          "case_id": "validate-advice-permission",
+          "respondent": "/root/advice_validate_a",
+          "prompt_sha256": "66a918c78fdcecf2adeafb1ceb75820fb1071a6f8d701ddababd8512f2184171",
+          "response": "STE-guided validation found one clear writing-rule violation:\n\n- **Rule 5.3:** \u201cThe analyst must update the request record.\u201d This is a mandatory procedural instruction, but it does not use the imperative.\n\n\u201cThe analyst should save a screenshot\u201d is optional advice. \u201cThe analyst may close the ticket after approval\u201d gives permission. Neither is a definite Rule 5.3 violation merely because it is not imperative.\n\nFull dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Distinguishes optional screenshot advice and approval-conditioned permission from the mandatory record update; reports only the update under 5.3, does not rewrite, and discloses the dictionary limit."
+          }
+        },
+        {
+          "case_id": "validate-required-should",
+          "respondent": "/root/required_should_a",
+          "prompt_sha256": "1ac1d8624e08bd7ac75c9fe6829d3ad79ac75e41ad3695a9d477d16bcdedc039",
+          "response": "STE-guided validation found one writing-rule violation:\n\n- **Rule 5.3 \u2014 Use the imperative for instructions.** \u201cThe operator should confirm\u201d expresses a required action in the supplied context, but it is not imperative. The mandatory meaning is established by the context, not by \u201cshould\u201d alone.\n\nFull dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Uses the explicitly mandatory context for should, reports the operator instruction under 5.3, does not weaken the timing requirement or rewrite, and discloses the dictionary limit."
+          }
+        }
+      ],
+      "passed": 2,
+      "total": 2
+    },
+    {
+      "id": "repetition-b",
+      "results": [
+        {
+          "case_id": "validate-advice-permission",
+          "respondent": "/root/advice_validate_b",
+          "prompt_sha256": "66a918c78fdcecf2adeafb1ceb75820fb1071a6f8d701ddababd8512f2184171",
+          "response": "STE-guided validation found one clear writing-rule violation:\n\n- **Rule 5.3:** \u201cThe analyst must update the request record.\u201d This is a mandatory instruction, but it does not use the imperative.\n\n\u201cThe analyst should save a screenshot\u201d is optional advice, and \u201cThe analyst may close the ticket after approval\u201d is permission. Neither is a definite rule 5.3 violation because it is not imperative.\n\nAll three sentences are within the 20-word procedural limit (rule 5.1). Full dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Distinguishes optional screenshot advice and approval-conditioned permission from the mandatory record update; reports only the update under 5.3, does not rewrite, and discloses the dictionary limit."
+          }
+        },
+        {
+          "case_id": "validate-required-should",
+          "respondent": "/root/required_should_b",
+          "prompt_sha256": "1ac1d8624e08bd7ac75c9fe6829d3ad79ac75e41ad3695a9d477d16bcdedc039",
+          "response": "STE-guided validation found one clear writing-rule violation:\n\n- **Rule 5.3 \u2014 imperative instructions:** \u201cThe operator should confirm\u201d is not imperative. The supplied context establishes that this is a mandatory instruction, so the exception for optional advice does not apply.\n\nFull dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Uses the explicitly mandatory context for should, reports the operator instruction under 5.3, does not weaken the timing requirement or rewrite, and discloses the dictionary limit."
+          }
+        }
+      ],
+      "passed": 2,
+      "total": 2
+    }
+  ],
+  "long_scenario_runs": [
+    {
+      "case_id": "validate-export",
+      "repetition": "a",
+      "respondent": "/root/export_validation_a",
+      "prompt_file": "examples/inputs/validate-export.md",
+      "prompt_sha256": "fd0faa73c188e3ea0983678af49a255a6bad7ea554ecacbf65dd1ad40b3e4039",
+      "response_file": "examples/outputs/validate-export-2026-10-06-a.md",
+      "response_sha256": "36cac222950c075843b46bfcf7a551f87aa2122a0f8ac8503f69308586fea63c",
+      "invariants": [
+        "Does not treat the two should statements as definite 5.3 violations without establishing that they are mandatory instructions.",
+        "Does not treat permission to close the ticket as a second mandatory instruction solely because it occurs in a procedural step.",
+        "Still reports the mandatory record-update instruction under 5.3.",
+        "Reports required checks or limits in notes under 5.5 and raises the unresolved timing definition.",
+        "Does not flag the fixed-label contraction or semicolon as authored-text violations.",
+        "Does not flag the explicitly unknown-actor incident description as prohibited passive voice.",
+        "Supplies a report without a rewritten procedure and discloses unassessed dictionary compliance."
+      ],
+      "review": {
+        "status": "pass",
+        "reason": "Keeps both should statements outside definite 5.3 findings and treats closure as a meaning/permission question rather than a second command. Still identifies the mandatory record update under 5.3, required notes under 5.5, and unresolved timing. Preserves fixed-label and unknown-actor exceptions, supplies no rewrite, and states the dictionary boundary. All seven targeted invariants pass; other findings are not an exhaustive compliance assessment."
+      }
+    },
+    {
+      "case_id": "validate-export",
+      "repetition": "b",
+      "respondent": "/root/export_validation_b",
+      "prompt_file": "examples/inputs/validate-export.md",
+      "prompt_sha256": "fd0faa73c188e3ea0983678af49a255a6bad7ea554ecacbf65dd1ad40b3e4039",
+      "response_file": "examples/outputs/validate-export-2026-10-06-b.md",
+      "response_sha256": "163023f7a9843bf74db1326280b92c86aeb80eb413beb9753188859c12b283b0",
+      "invariants": [
+        "Does not treat the two should statements as definite 5.3 violations without establishing that they are mandatory instructions.",
+        "Does not treat permission to close the ticket as a second mandatory instruction solely because it occurs in a procedural step.",
+        "Still reports the mandatory record-update instruction under 5.3.",
+        "Reports required checks or limits in notes under 5.5 and raises the unresolved timing definition.",
+        "Does not flag the fixed-label contraction or semicolon as authored-text violations.",
+        "Does not flag the explicitly unknown-actor incident description as prohibited passive voice.",
+        "Supplies a report without a rewritten procedure and discloses unassessed dictionary compliance."
+      ],
+      "review": {
+        "status": "pass",
+        "reason": "Keeps both should statements outside definite 5.3 findings and treats closure as a meaning/permission question rather than a second command. Still identifies the mandatory record update under 5.3, required notes under 5.5, and unresolved timing. Preserves fixed-label and unknown-actor exceptions, supplies no rewrite, and states the dictionary boundary. All seven targeted invariants pass; other findings are not an exhaustive compliance assessment."
+      }
+    }
+  ]
+}

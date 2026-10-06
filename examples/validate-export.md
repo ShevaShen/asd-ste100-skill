@@ -2,6 +2,8 @@
 
 This original fictional scenario was run through the actual self-contained skill in a fresh responding-agent context. The response was not hand-written as an ideal answer.
 
+A [follow-up with the corrected skill](validate-export-followup.md) records two fresh runs of the same request. The initial response and review below are preserved unchanged.
+
 ## Reviewer assessment
 
 The response stays within VALIDATE: it supplies no corrected procedure. It identifies the eight-sentence paragraph with 6.6, conditions after commands with 5.4, and mandatory material in notes with 5.5. It preserves quoted-label exceptions and the unknown-actor passive exception. Its timing and approval questions identify information that a process owner would need to resolve.

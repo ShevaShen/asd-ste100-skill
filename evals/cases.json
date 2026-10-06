@@ -115,6 +115,35 @@
         "Cites only 7.1\u20137.3.",
         "Provides a rewritten safety instruction."
       ]
+    },
+    {
+      "id": "validate-advice-permission",
+      "prompt": "VALIDATE only this procedure excerpt. Do not rewrite it. Context: the screenshot is optional advice. Closing the ticket is permitted, not required. Updating the request record is mandatory. Text:\n\nThe analyst should save a screenshot. The analyst may close the ticket after approval. The analyst must update the request record.",
+      "invariants": [
+        "Does not report the recommendation or permission as a definite 5.3 violation merely for not being imperative.",
+        "Recognizes the mandatory update instruction as a supported 5.3 finding; does not exempt all modal statements.",
+        "Preserves the optional screenshot and approval-conditioned permission when discussing meaning.",
+        "Provides no corrected procedure and does not claim full dictionary compliance."
+      ],
+      "failure_examples": [
+        "Demands imperative wording for all three statements.",
+        "Converts should or may into an obligation.",
+        "Treats the mandatory update as optional."
+      ]
+    },
+    {
+      "id": "validate-required-should",
+      "prompt": "VALIDATE only the following work instruction. Do not rewrite it. Context: in this fictional procedure, the stated 90-second limit is mandatory. The word should in the draft expresses a required result, not advice. Text:\n\nThe operator should confirm the Ready indication within 90 seconds after the restart.",
+      "invariants": [
+        "Uses the supplied mandatory meaning rather than classifying should as optional advice.",
+        "Identifies the mandatory operator instruction as a supported 5.3 finding.",
+        "Does not weaken the timing requirement or supply a rewritten instruction.",
+        "Does not claim full dictionary compliance."
+      ],
+      "failure_examples": [
+        "Treats every use of should as exempt from 5.3.",
+        "Calls the confirmation or 90-second limit optional."
+      ]
     }
   ]
 }
