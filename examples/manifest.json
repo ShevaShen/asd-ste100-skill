@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "skill_sha256": "d54011ed7e0350b9955cea3d752b12ebb7e8dcd59e00ec5a2f680964c6620d2e",
+  "model": null,
+  "model_version": null,
+  "sampling_settings": null,
+  "metadata_note": "Exact backend model/version and sampling settings were not exposed by the subagent interface. No overrides were requested.",
+  "execution": "One fresh responding context per scenario; the clarification follow-up reuses its original context. Respondents read only the skill and their prompt. No retrieval or tools during composition; a tool saved the completed response afterward.",
+  "reviewer": "Primary Codex agent, not human expert review. The user review of prior records is not counted as an independent model rerun.",
+  "scenarios": {
+    "normalize-deployment": "/root/example_deployment",
+    "validate-export": "/root/example_validation",
+    "clarify-migration": "/root/example_clarification"
+  },
+  "files": {
+    "inputs/clarify-migration-followup.md": "1ec6ab56669e80e182187c428fac467d38edd0af19666f5c76dd511188fd35a1",
+    "inputs/clarify-migration.md": "b5f3c3b9824620558f0a539961288e7669290673013354a966188abf921c9542",
+    "inputs/normalize-deployment.md": "d24bf634d0f9c3598587fde8785bc53c5bb23c650a737f97c0b8a70cfaa73657",
+    "inputs/validate-export.md": "fd0faa73c188e3ea0983678af49a255a6bad7ea554ecacbf65dd1ad40b3e4039",
+    "outputs/clarify-migration-final.md": "7f686ed458080a904d8350cea3ac392a5fbcc23a19401a0547c3f59b549648e3",
+    "outputs/clarify-migration.md": "ff9a3caca82eb87db40b995c96750d44b2747edf866f736d08f188faaf23a882",
+    "outputs/normalize-deployment.md": "7532e5618e90944ed895cc8fe656518e5d0b42d7ab26d3625257d2baf37b055e",
+    "outputs/validate-export.md": "bdf2e031d39a5e12ef28dd527a4d15f44fd8e88abf68a57ffdc3e0219ab9333e"
+  },
+  "limitations": [
+    "One run per long scenario.",
+    "The validation example contains a documented overstatement about recommendation wording.",
+    "The deployment rewrite relies on the initial dispatch state in its supplied context.",
+    "No full dictionary compliance or real-system validation."
+  ]
+}

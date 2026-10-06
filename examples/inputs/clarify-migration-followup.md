@@ -1,0 +1,7 @@
+Here are the missing technical details for this fictional training scenario. Use these answers with the original draft to produce the definitive procedure. Preserve the optional screenshot, approvals, limits, identifiers, and final records. Do not invent additional actions.
+
+1. “Restart service” restarts the relay service on RLY-7. “Before restarting it” refers to this same restart. Connect COL-E2 to RLY-7, and load RP-2.4 on RLY-7 before that restart.
+2. “Transfer” means uploading RP-2.4 to RLY-7. The upload fails if its result shows “Failed”.
+3. If that upload fails, restore relay package RP-2.3 on RLY-7. Disconnect COL-E2 from RLY-7, reconnect COL-E1 to RLY-7, and tell the change owner. Keep live delivery disabled. The operator knows the package-restore control. Do not add a restart or a test to this rollback. Leave CP-6.1 on COL-E2 unchanged. End the procedure with the required record.
+4. If RLY-7 does not show “Acknowledged” for TEST-451 within 30 seconds after sending the event, stop and contact the change owner. Keep live delivery disabled. Do not roll back for this test failure unless the change owner supplies a separate instruction. End the procedure with the required record.
+5. If the migration is incomplete at 13:15 UTC, stop migration actions, keep live delivery disabled, and contact the change owner. Do not start or continue a rollback outside the window without separate authorization from the change owner. Complete the required record even when the procedure stops early. Mark a test that was not run as “Not run”.

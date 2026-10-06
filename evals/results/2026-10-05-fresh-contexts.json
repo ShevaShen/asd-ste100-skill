@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "skill_sha256": "d54011ed7e0350b9955cea3d752b12ebb7e8dcd59e00ec5a2f680964c6620d2e",
+  "cases_sha256": "4d5dbf6cd20226aabdad393592725365801925adbb4238df8e0e14afa4671f10",
+  "execution": {
+    "respondent": "Independent Codex subagent; fresh context for every case and repetition",
+    "model": null,
+    "model_version": null,
+    "sampling_settings": null,
+    "metadata_note": "Exact backend model/version and sampling settings were not exposed. No overrides were requested.",
+    "rubric_visible_to_respondent": false,
+    "cases_batched_in_one_context": false,
+    "retrieval_during_composition": false,
+    "tools_during_composition": false,
+    "response_persistence": "After composition, a file-writing tool saved the exact response.",
+    "reviewer": "Primary Codex agent; semantic review, not a human expert assessment",
+    "user_review": "The user inspected prior recorded responses; this is not counted as an independently rerun evaluation."
+  },
+  "limitations": [
+    "Two repetitions per case, one model configuration of unavailable identity.",
+    "Repeated runs can share model biases even with separate contexts.",
+    "Rubric passes cover the stated invariants, not exhaustive STE compliance.",
+    "Longer examples expose additional limitations; see examples/validate-export.md."
+  ],
+  "runs": [
+    {
+      "id": "fresh-context-repetition-1",
+      "results": [
+        {
+          "case_id": "should-versus-must",
+          "respondent": "/root/fresh_should_1",
+          "prompt_sha256": "d40f8373eab5020af222760185fad8b56744290297aa1f9a42e35c347902c0c9",
+          "response": ":::writing{variant=\"standard\" id=\"58216\"}\nOperators should save a copy before they update the package. Operators must record the installed version.\n:::\n",
+          "review": {
+            "status": "pass",
+            "reason": "Retains should, must, and the before-update timing; no obligation is strengthened or weakened."
+          }
+        },
+        {
+          "case_id": "unknown-actor",
+          "respondent": "/root/fresh_unknown_1",
+          "prompt_sha256": "369eb000d722f4606106b65b422e5309ac43abe3dcb6864f22ef0d882c1a7111",
+          "response": ":::writing{variant=\"standard\" id=\"41826\"}\nThe log was deleted during the update. The available evidence does not identify who or what deleted the log.\n:::\n",
+          "review": {
+            "status": "pass",
+            "reason": "Retains the deletion during the update and explicitly unknown actor; does not assert causation."
+          }
+        },
+        {
+          "case_id": "conditional-instruction",
+          "respondent": "/root/fresh_conditional_1",
+          "prompt_sha256": "0debb987fb635157eaadd3eae67d3edd7748edf847bc65298db4afd0a207d58a",
+          "response": ":::writing{variant=\"standard\" id=\"41382\"}\nOnly if the pressure is less than 4 kPa and the indicator is green, open valve V-2.\n:::\n",
+          "review": {
+            "status": "pass",
+            "reason": "Preserves both necessary conditions, strict less than 4 kPa, V-2, and green before the command."
+          }
+        },
+        {
+          "case_id": "fixed-labels",
+          "respondent": "/root/fresh_labels_1",
+          "prompt_sha256": "d4105a3b90e2c5c1b35ad335d3665d691dbb363865a273baeb256310adcdd4c9",
+          "response": ":::writing{variant=\"standard\" id=\"58216\"}\nAfter the display shows \u201cColour check complete\u201d, press the \u201cDON'T RESET; HOLD\u201d button.\n:::\n",
+          "review": {
+            "status": "pass",
+            "reason": "Preserves both literal strings, including spelling, apostrophe, capitalization and semicolon, with display before action."
+          }
+        },
+        {
+          "case_id": "validate-only",
+          "respondent": "/root/fresh_validate_1",
+          "prompt_sha256": "803cbb259e437d2d3c70e3cb0916c7b162a6f62afb77d280ee6be9a338d7f298",
+          "response": "STE-guided validation found three writing-rule violations:\n\n- **Rule 4.2:** \u201cDon't\u201d is a contraction.\n- **Rule 8.1:** The semicolon in \u201cpanel; record\u201d is not permitted.\n- **Rule 5.2:** \u201cDon't open the panel; record the serial number.\u201d contains two instructions in one sentence. The text does not establish that the actions occur simultaneously.\n\nFull dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Reports 4.2 and 8.1 specifically, provides no rewritten procedure, and discloses unassessed dictionary compliance."
+          }
+        },
+        {
+          "case_id": "clarification-needed",
+          "respondent": "/root/fresh_clarify_1",
+          "prompt_sha256": "175c62d002c5851f4fce30701788608fca93bd341e00a3e1065da25e2e9e5fe9",
+          "response": "What does \u201cit\u201d refer to: the sensor, the controller, or another component?\n",
+          "review": {
+            "status": "pass",
+            "reason": "Asks whether the referent is the sensor or controller without choosing a component or issuing a rewrite that changes the sequence."
+          }
+        },
+        {
+          "case_id": "description-rule-ids",
+          "respondent": "/root/fresh_description_1",
+          "prompt_sha256": "7be2bbe827f1e5856feda05269c76315d18b6966bc1dd98777eaaf40d8ee1204",
+          "response": "The paragraph has two clear writing-rule violations:\n\n- **Rule 6.5 \u2014 one topic per paragraph:** The paragraph combines archive records with reception lighting. The topic changes at \u201cThe reception lights use a separate circuit.\u201d These topics need separate paragraphs.\n- **Rule 6.6 \u2014 no more than six sentences per paragraph:** The supplied paragraph has **seven sentences**, which exceeds the limit by one.\n\nAll seven sentences are within the 25-word descriptive sentence limit in **rule 6.3**.\n\nThis is an STE-guided assessment. Full dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Identifies seven sentences under 6.6 and distinct archive/lighting topics under 6.5; no rewrite, invented relationship or dictionary claim."
+          }
+        },
+        {
+          "case_id": "safety-rule-ids",
+          "respondent": "/root/fresh_safety_1",
+          "prompt_sha256": "9aecea662d08effd1d065d1385e6565e19ed41ce1bd8e820aacf69961d4157bd",
+          "response": "STE-guided validation found three safety-writing violations:\n\n- **Rule 7.1:** The instruction has no **CAUTION** identifier, which the governing convention requires for this equipment-damage risk.\n- **Rule 7.2:** \u201cThe window needs attention.\u201d begins with a general statement, not a clear command or a condition the reader must understand first.\n- **Rule 7.3:** \u201cWipe the window with the specified soft cloth.\u201d does not explain the supplied hazard: an abrasive cloth can scratch the optical window.\n\nFull dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Cites 7.1, 7.2 and 7.3 individually for the missing identifier, non-command opening and missing consequence; no invented injury, rewrite or compliance claim."
+          }
+        }
+      ],
+      "passed": 8,
+      "total": 8
+    },
+    {
+      "id": "fresh-context-repetition-2",
+      "results": [
+        {
+          "case_id": "should-versus-must",
+          "respondent": "/root/fresh_should_2",
+          "prompt_sha256": "d40f8373eab5020af222760185fad8b56744290297aa1f9a42e35c347902c0c9",
+          "response": ":::writing{variant=\"document\" id=\"58206\"}\nOperators should save a copy before they update the package. Operators must record the installed version.\n:::\n",
+          "review": {
+            "status": "pass",
+            "reason": "Retains should, must, and the before-update timing; no obligation is strengthened or weakened."
+          }
+        },
+        {
+          "case_id": "unknown-actor",
+          "respondent": "/root/fresh_unknown_2",
+          "prompt_sha256": "369eb000d722f4606106b65b422e5309ac43abe3dcb6864f22ef0d882c1a7111",
+          "response": ":::writing{variant=\"standard\" id=\"59382\"}\nThe log was deleted during the update. The available evidence does not identify who or what deleted the log.\n:::\n",
+          "review": {
+            "status": "pass",
+            "reason": "Retains the deletion during the update and explicitly unknown actor; does not assert causation."
+          }
+        },
+        {
+          "case_id": "conditional-instruction",
+          "respondent": "/root/fresh_conditional_2",
+          "prompt_sha256": "0debb987fb635157eaadd3eae67d3edd7748edf847bc65298db4afd0a207d58a",
+          "response": ":::writing{variant=\"standard\" id=\"53817\"}\nOnly if the pressure is less than 4 kPa and the indicator is green, open valve V-2.\n:::\n",
+          "review": {
+            "status": "pass",
+            "reason": "Preserves both necessary conditions, strict less than 4 kPa, V-2, and green before the command."
+          }
+        },
+        {
+          "case_id": "fixed-labels",
+          "respondent": "/root/fresh_labels_2",
+          "prompt_sha256": "d4105a3b90e2c5c1b35ad335d3665d691dbb363865a273baeb256310adcdd4c9",
+          "response": ":::writing{variant=\"standard\" id=\"61729\"}\nAfter the display shows \u201cColour check complete\u201d, press the \u201cDON'T RESET; HOLD\u201d button.\n:::\n",
+          "review": {
+            "status": "pass",
+            "reason": "Preserves both literal strings, including spelling, apostrophe, capitalization and semicolon, with display before action."
+          }
+        },
+        {
+          "case_id": "validate-only",
+          "respondent": "/root/fresh_validate_2",
+          "prompt_sha256": "803cbb259e437d2d3c70e3cb0916c7b162a6f62afb77d280ee6be9a338d7f298",
+          "response": "STE-guided validation found three writing-rule violations:\n\n- **Rule 4.2:** \u201cDon't\u201d is a contraction.\n- **Rule 8.1:** The semicolon in \u201cpanel; record\u201d is not permitted.\n- **Rule 5.2:** \u201cDon't open the panel; record the serial number.\u201d gives two instructions in one sentence. The actions are not stated as simultaneous.\n\nFull dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Reports 4.2 and 8.1 specifically, provides no rewritten procedure, and discloses unassessed dictionary compliance."
+          }
+        },
+        {
+          "case_id": "clarification-needed",
+          "respondent": "/root/fresh_clarify_2",
+          "prompt_sha256": "175c62d002c5851f4fce30701788608fca93bd341e00a3e1065da25e2e9e5fe9",
+          "response": "What does \u201cit\u201d refer to: the sensor, the controller, or another component?\n",
+          "review": {
+            "status": "pass",
+            "reason": "Asks whether the referent is the sensor or controller without choosing a component or issuing a rewrite that changes the sequence."
+          }
+        },
+        {
+          "case_id": "description-rule-ids",
+          "respondent": "/root/fresh_description_2",
+          "prompt_sha256": "7be2bbe827f1e5856feda05269c76315d18b6966bc1dd98777eaaf40d8ee1204",
+          "response": "This STE-guided review finds two paragraph-structure violations:\n\n- **Rule 6.5 \u2014 one topic per paragraph:** The paragraph combines archive records (\u201cThe archive stores service records.\u201d) with reception lighting (\u201cThe reception lights use a separate circuit.\u201d). These are separate topics, despite the final sentence stating their lack of connection.\n- **Rule 6.6 \u2014 paragraph sentence limit:** The paragraph contains **7 sentences**. The limit is **6 sentences per paragraph**.\n\nEach sentence is within the 25-word descriptive limit in **rule 6.3**. Full dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Identifies seven sentences under 6.6 and distinct archive/lighting topics under 6.5; no rewrite, invented relationship or dictionary claim."
+          }
+        },
+        {
+          "case_id": "safety-rule-ids",
+          "respondent": "/root/fresh_safety_2",
+          "prompt_sha256": "9aecea662d08effd1d065d1385e6565e19ed41ce1bd8e820aacf69961d4157bd",
+          "response": "This STE-guided validation identifies three writing-rule violations:\n\n- **Rule 7.1:** The required **CAUTION** risk identifier is missing under the supplied governing convention.\n- **Rule 7.2:** \u201cThe window needs attention.\u201d does not begin the safety instruction with a clear command or a necessary condition.\n- **Rule 7.3:** The instruction omits the supplied hazard explanation: an abrasive cloth can scratch the optical window.\n\nBoth sentences meet the 20-word safety limit in **rule 5.1**. Full dictionary compliance was not assessed.\n",
+          "review": {
+            "status": "pass",
+            "reason": "Cites 7.1, 7.2 and 7.3 individually for the missing identifier, non-command opening and missing consequence; no invented injury, rewrite or compliance claim."
+          }
+        }
+      ],
+      "passed": 8,
+      "total": 8
+    }
+  ]
+}

@@ -36,54 +36,101 @@ procedures, descriptions, safety instructions, punctuation, counting conventions
 and consistency. It includes important exceptions and separates numbered rules
 from additional recommendations.
 
-## Original examples
+## Original examples, generated with the skill
 
-These examples illustrate behavior, not certified dictionary compliance.
+These longer fictional scenarios were submitted to separate responding agents
+that loaded the actual `SKILL.md`. Each agent saw only its scenario and the skill,
+with no intended answer or grading rubric. The complete documents include the
+source, actual response, and a separate reviewer assessment. The migration
+example includes a real clarification turn and the resulting final procedure.
 
-### Rewrite while preserving the condition
+| Example | What it exercises | Complete source and response |
+| --- | --- | --- |
+| Configuration deployment | Approvals, optional evidence, verified exports, exact interface labels, acceptance limits, failure handling, and permission to resume service. | [Full NORMALIZE example](examples/normalize-deployment.md) |
+| Service-log export | Description and procedure rules, required material in notes, conflicting timing definitions, approval scope, passive-voice exceptions, and VALIDATE-only behavior. | [Full validation report](examples/validate-export.md) |
+| Collector migration | Ambiguous component references, upload versus test failure, rollback scope, window expiry, and mandatory records after an early stop. | [Full clarification exchange](examples/clarify-migration.md) |
 
-**NORMALIZE input**
+### Deployment: preserve the conditions that make the procedure work
 
-> If the status is green, you must press the “Start cycle” button and then record the batch ID.
+The source describes an update from DG-4.8.1 to DG-4.8.2 at station H-17. Dispatch
+is already disabled. The operator needs approval, an empty queue, and a verified
+export before applying the update. The screenshot is optional; the completion
+record is mandatory. The complete example retains all of that context.
 
-**Example output**
+**Source excerpt**
 
-> If the status is green:
+> The existing settings are to be exported by clicking “Export settings”; attach the resulting file to change record CHG-2041 before applying the update. The file name must be H-17-DG-4.8.1.json. NOTE: The exported file must open successfully and contain exactly 12 routing rules. If either check fails, stop and contact the release owner. You must not apply DG-4.8.2 without this verified export.
+
+**Actual response excerpt**
+
+> 6. Click “Export settings” to export the existing settings. Make sure that the file name is H-17-DG-4.8.1.json. Attach the exported file to change record CHG-2041 before you apply the update.
 >
-> 1. Press the “Start cycle” button.
-> 2. Record the batch ID.
+> 7. Verify that the exported file opens successfully. Verify that the exported file contains exactly 12 routing rules. If either check fails, stop the procedure. If either check fails, contact the release owner. Do not apply DG-4.8.2 without this verified export.
 
-Both actions remain conditional and mandatory, their order is preserved, and the
-interface label is unchanged. Recommendations require different treatment:
-“should” must not silently become “must” or an unconditional command.
+The export checks become required steps. Later, the response preserves permission
+to enable dispatch only after both checks pass:
 
-### Validate without rewriting
+> If the active-configuration check or the test fails, keep dispatch disabled. If either fails, contact the release owner. You may enable normal dispatch only when both the active-configuration check and the test pass.
 
-**VALIDATE-only input**
+The [complete response](examples/normalize-deployment.md) also preserves the
+90-second readiness limit, 30-second test limit, and exact “DON'T CLOSE; WAIT”
+label. Review limitation: it relies on the initial disabled-dispatch state from
+the supplied context without repeating that prerequisite.
 
-> Don't open the panel; record the serial number.
+### Validation: review the draft without producing a replacement
 
-**Example report**
+The export scenario contains six work steps, three notes, a descriptive opening,
+and a handover paragraph. It includes an eight-sentence paragraph, instructions
+joined with semicolons, approval conditions after commands, and required checks
+hidden in notes. It also contains a fixed label with a semicolon, which must stay
+unchanged, and an incident whose deletion actor is unknown.
 
-- “Don't”: contraction in authored text (4.2).
-- “;”: semicolon in authored text (8.1).
-- Two instructions share one sentence without a simultaneous-action condition (5.2).
-- Full dictionary compliance was not assessed.
+**Source excerpt**
 
-The report assesses the supplied text. It does not supply a corrected procedure.
+> NOTE: You must compare the Tenant ID in the downloaded file with the approved request before sharing the folder link. If they do not match, do not share the link and notify the data steward.
 
-### Ask before resolving an ambiguous reference
+**Actual finding under rule 5.5**
 
-**NORMALIZE input**
+> The note contains required checks, a prohibition, and a notification action. The procedure cannot safely omit this note because it controls whether sharing is permitted.
 
-> Before you replace it, disconnect the sensor from the controller.
+The [full report](examples/validate-export.md) separates writing findings, meaning
+questions, and vocabulary uncertainty. It asks what starts the ten-minute clock
+and whether three references to approval mean one authorization or several.
+It does not supply a rewritten procedure or invent dictionary approval.
 
-**Example response**
+**Known limitation from review:** the actual report labels some “should” wording
+as a definite imperative-form violation before establishing whether it is advice
+or an instruction. The example explicitly corrects that assessment in reviewer
+notes and retains the original model response. It is useful evidence of behavior,
+not a gold-standard report.
 
-> Does “it” refer to the sensor or the controller?
+### Clarification: resolve the component and failure path before rewriting
 
-A definitive rewrite would require choosing which component is replaced. The
-assistant asks rather than inventing that meaning.
+The migration draft says:
+
+> Before restarting it, disconnect COL-E1 from RLY-7. Connect COL-E2, load relay package RP-2.4, and select “Restart service”. If the transfer fails, return it to the previous version and tell the change owner. Do not enable live delivery during a rollback.
+
+**Actual first response**
+
+> I need these technical details before I can produce a definitive procedure:
+>
+> 1. Which component and service does “Restart service” restart? Does “Before restarting it” refer to the same restart?
+> 2. What does “the transfer” refer to? What conditions indicate that the transfer failed?
+> 3. Which component must return to its previous version? Specify the version and the required rollback actions, including the required collector connections.
+> 4. If RLY-7 does not show “Acknowledged” for TEST-451 within 30 seconds, what must the operator do?
+> 5. If the procedure cannot finish by 13:15 UTC, what must the operator do?
+
+The fictional follow-up identifies the relay as the restart target and defines
+upload failure, rollback connections, test-failure handling, and window expiry.
+The resulting procedure keeps upload rollback separate from a failed test,
+requires authorization before live delivery, and records the outcome even after
+an early stop. Read the [complete exchange and final procedure](examples/clarify-migration.md).
+
+[Execution metadata](examples/manifest.json) records the skill hash, prompt and
+response hashes, context boundaries, and unavailable model metadata. Responses
+were reviewed by the primary assistant, not a human expert. Exact responses are
+retained in [examples/outputs/](examples/outputs/). These are fictional writing
+examples, not validated operating instructions or certified STE.
 
 ## Limits
 
@@ -135,7 +182,7 @@ for extraction assumptions and limitations.
 
 [Behavioral cases](evals/cases.json) cover recommendations versus requirements,
 unknown actors, conditional instructions, fixed labels, VALIDATE-only requests,
-and clarification. They specify meaning-preservation criteria rather than one
+clarification, and individual description/safety rule citations. They specify meaning-preservation criteria rather than one
 required answer string. See the [evaluation procedure and recorded results](evals/README.md).
 
 These evaluations exercise an assistant using the actual `SKILL.md`. They are

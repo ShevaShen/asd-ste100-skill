@@ -5,38 +5,116 @@
     {
       "id": "should-versus-must",
       "prompt": "NORMALIZE this descriptive policy text: Operators should save a copy before they update the package. Operators must record the installed version.",
-      "invariants": ["Saving a copy remains a recommendation, not a requirement.", "Recording the installed version remains mandatory.", "The recommendation to save a copy still applies before the update."],
-      "failure_examples": ["Changes should to must or an unqualified command.", "Changes must to should, may, or can.", "Removes or reverses the temporal condition."]
+      "invariants": [
+        "Saving a copy remains a recommendation, not a requirement.",
+        "Recording the installed version remains mandatory.",
+        "The recommendation to save a copy still applies before the update."
+      ],
+      "failure_examples": [
+        "Changes should to must or an unqualified command.",
+        "Changes must to should, may, or can.",
+        "Removes or reverses the temporal condition."
+      ]
     },
     {
       "id": "unknown-actor",
       "prompt": "NORMALIZE this incident description: The log was deleted during the update. The available evidence does not identify who or what deleted it.",
-      "invariants": ["The deletion remains a reported event during the update.", "The actor remains unknown.", "The update is not presented as the cause merely because it coincided with the deletion."],
-      "failure_examples": ["Invents an operator, administrator, software process, or other actor.", "Changes during to because of.", "Rejects passive voice despite the explicitly unknown actor."]
+      "invariants": [
+        "The deletion remains a reported event during the update.",
+        "The actor remains unknown.",
+        "The update is not presented as the cause merely because it coincided with the deletion."
+      ],
+      "failure_examples": [
+        "Invents an operator, administrator, software process, or other actor.",
+        "Changes during to because of.",
+        "Rejects passive voice despite the explicitly unknown actor."
+      ]
     },
     {
       "id": "conditional-instruction",
       "prompt": "NORMALIZE this procedure: Open valve V-2 only if the pressure is less than 4 kPa and the indicator is green.",
-      "invariants": ["Both conditions remain necessary before opening the valve.", "The pressure comparison remains strictly less than 4 kPa.", "The valve identifier and indicator color remain unchanged."],
-      "failure_examples": ["Changes and to or.", "Changes less than to at most or less than or equal to.", "Gives an unconditional command followed by the conditions."]
+      "invariants": [
+        "Both conditions remain necessary before opening the valve.",
+        "The pressure comparison remains strictly less than 4 kPa.",
+        "The valve identifier and indicator color remain unchanged."
+      ],
+      "failure_examples": [
+        "Changes and to or.",
+        "Changes less than to at most or less than or equal to.",
+        "Gives an unconditional command followed by the conditions."
+      ]
     },
     {
       "id": "fixed-labels",
-      "prompt": "NORMALIZE this procedure. The quoted strings are exact interface labels: Press the “DON'T RESET; HOLD” button after the display shows “Colour check complete”.",
-      "invariants": ["Preserves the exact label DON'T RESET; HOLD, including its apostrophe and semicolon.", "Preserves the exact label Colour check complete, including British spelling and capitalization.", "The display message must precede pressing the button."],
-      "failure_examples": ["Expands DON'T inside the label.", "Removes the semicolon inside the label.", "Changes Colour to Color.", "Reverses the condition and action."]
+      "prompt": "NORMALIZE this procedure. The quoted strings are exact interface labels: Press the \u201cDON'T RESET; HOLD\u201d button after the display shows \u201cColour check complete\u201d.",
+      "invariants": [
+        "Preserves the exact label DON'T RESET; HOLD, including its apostrophe and semicolon.",
+        "Preserves the exact label Colour check complete, including British spelling and capitalization.",
+        "The display message must precede pressing the button."
+      ],
+      "failure_examples": [
+        "Expands DON'T inside the label.",
+        "Removes the semicolon inside the label.",
+        "Changes Colour to Color.",
+        "Reverses the condition and action."
+      ]
     },
     {
       "id": "validate-only",
       "prompt": "VALIDATE only. Do not rewrite the text or provide a corrected version. Review this procedure: Don't open the panel; record the serial number.",
-      "invariants": ["Reports findings without supplying a rewritten or corrected procedure.", "Identifies the contraction and the semicolon with applicable rule IDs 4.2 and 8.1.", "Does not claim full dictionary compliance was assessed."],
-      "failure_examples": ["Returns a revised procedure, even after a valid report.", "Labels all words approved without supporting evidence.", "Claims full compliance or certification."]
+      "invariants": [
+        "Reports findings without supplying a rewritten or corrected procedure.",
+        "Identifies the contraction and the semicolon with applicable rule IDs 4.2 and 8.1.",
+        "Does not claim full dictionary compliance was assessed."
+      ],
+      "failure_examples": [
+        "Returns a revised procedure, even after a valid report.",
+        "Labels all words approved without supporting evidence.",
+        "Claims full compliance or certification."
+      ]
     },
     {
       "id": "clarification-needed",
       "prompt": "NORMALIZE this procedure: Before you replace it, disconnect the sensor from the controller.",
-      "invariants": ["Recognizes that it can refer to the sensor or the controller.", "Asks which component is to be replaced before choosing a definitive rewrite.", "Preserves the required ordering of disconnection before replacement."],
-      "failure_examples": ["Silently chooses the sensor or controller.", "Deletes the replacement condition to remove the ambiguity.", "Presents an assumed interpretation as the final revision."]
+      "invariants": [
+        "Recognizes that it can refer to the sensor or the controller.",
+        "Asks which component is to be replaced before choosing a definitive rewrite.",
+        "Preserves the required ordering of disconnection before replacement."
+      ],
+      "failure_examples": [
+        "Silently chooses the sensor or controller.",
+        "Deletes the replacement condition to remove the ambiguity.",
+        "Presents an assumed interpretation as the final revision."
+      ]
+    },
+    {
+      "id": "description-rule-ids",
+      "prompt": "VALIDATE only this system description. Do not rewrite it. Review paragraph structure and sentence count with specific rule IDs. The following is one paragraph:\n\nThe archive stores service records. Each record has a unique identifier. The archive retains records for one year. The reception lights use a separate circuit. A wall switch controls those lights. The switch is beside the door. The lights have no connection to the archive.",
+      "invariants": [
+        "Identifies seven sentences in one paragraph under 6.6.",
+        "Identifies the two different topics under 6.5 rather than a section-wide range.",
+        "Reports findings without a rewritten paragraph.",
+        "Does not claim full dictionary verification."
+      ],
+      "failure_examples": [
+        "Uses only 6.1\u20136.6 for a finding.",
+        "Invents a causal link between archive storage and lighting."
+      ]
+    },
+    {
+      "id": "safety-rule-ids",
+      "prompt": "VALIDATE only the safety instruction below, with specific rule IDs. Do not rewrite it. Context for this fictional manual: the governing convention uses CAUTION for this equipment-damage risk. An abrasive cloth can scratch the optical window. That explanation is absent from the instruction. Instruction text:\n\nThe window needs attention. Wipe the window with the specified soft cloth.",
+      "invariants": [
+        "Cites 7.1 for the missing applicable risk identifier.",
+        "Cites 7.2 for starting with a description instead of a command or necessary condition.",
+        "Cites 7.3 for the missing risk or consequence explanation.",
+        "Does not invent injury hazards or change equipment damage into a different severity.",
+        "Preserves VALIDATE-only scope and states that full dictionary compliance was not assessed."
+      ],
+      "failure_examples": [
+        "Cites only 7.1\u20137.3.",
+        "Provides a rewritten safety instruction."
+      ]
     }
   ]
 }

@@ -47,8 +47,9 @@ conventions. They are not additional numbered STE rules.
 ## Vocabulary and technical terms — rules 1.1–1.14
 
 STE vocabulary comprises dictionary-approved words, technical nouns, and
-technical verbs. Dictionary approval does not extend automatically to every
-meaning, grammatical role, or inflection of a word (1.1–1.4).
+technical verbs (1.1). Use dictionary-approved words only in their specified
+grammatical roles (1.2) and meanings (1.3). Use only the approved forms of verbs
+and adjectives (1.4).
 
 For this lookup-free workflow, favor clear, concrete wording and preserve
 necessary domain terminology. Where exact dictionary approval is uncertain,
@@ -86,10 +87,10 @@ authorize unrestricted use of every domain-associated word. A non-approved word
 can be usable as a technical noun or part of one (1.6). Do not turn a technical
 noun into a verb merely because ordinary English permits it (1.7).
 
-Prefer established company, industry, or subject-field nouns. If a term must be
-selected, use a clear, short term of no more than three words. Avoid regional
-expressions, slang, and jargon. Use one term consistently for the same item
-(1.8–1.11). Colors have a special technical-noun treatment: do not form color
+Prefer established company, industry, or subject-field nouns (1.8). If a term must
+be selected, use a clear, short term (1.9), with no more than three words (2.1).
+Avoid regional expressions, slang, and jargon (1.10). Use one term consistently
+for the same item (1.11). Colors have a special technical-noun treatment: do not form color
 comparatives or superlatives, such as adding “-er” or “-est” (1.5).
 
 Technical verbs are permitted in four categories (1.12):
@@ -112,13 +113,13 @@ Do not change the spelling of fixed quoted text (1.14).
 
 ## Noun groups — rules 2.1–2.2
 
-Limit multi-word nouns to three words. An established longer
+Limit multi-word nouns to three words (2.1). An established longer
 technical name is an exception requiring careful presentation: give its full
 official form first, then explain a clear shorter form or use an approved
-abbreviation. Do not shorten it in a way that changes the item identified.
+abbreviation (2.2). Do not shorten it in a way that changes the item identified.
 
 Hyphens can group words that genuinely operate together. Do not join unrelated
-words or create a hyphenated group of more than three words to evade the limit.
+words or create a hyphenated group of more than three words to evade the limit (2.2).
 Keep official hyphenation. Do not add unnecessary abbreviations or hyphens to
 already clear short terms.
 
@@ -127,8 +128,8 @@ already clear short terms.
 - Use permitted verb forms. Ordinary grammatical correctness alone does not
   establish dictionary approval (3.1).
 - The permitted framework uses infinitives, imperatives, simple present, simple
-  past, simple future, and permitted past participles as adjectives. Avoid perfect
-  and progressive tenses and complex auxiliary constructions (3.2, 3.4).
+  past, simple future, and permitted past participles as adjectives (3.2). Avoid
+  perfect and progressive tenses (3.2) and complex auxiliary constructions (3.4).
 - A permitted past participle can describe a condition before a noun or after
   a form of “be,” “become,” or “stay.” A condition expressed this way is not
   automatically passive voice. Do not reject every occurrence of “is” plus
@@ -169,24 +170,29 @@ a sentence must not remove its condition, cause, exception, or logical connectio
 
 ## Descriptions — rules 6.1–6.6
 
-Introduce information gradually. Reuse consistent key terms and connect related
-ideas. Limit descriptive sentences to 25 words. This includes descriptive notes
-inside procedures.
+- Introduce information gradually (6.1).
+- Reuse key terms and connecting phrases to give the text a logical structure (6.2).
+- Limit descriptive sentences to 25 words, including descriptive notes in procedures (6.3).
+- Group related information in paragraphs. Introduce the topic, then arrange its
+  supporting information logically (6.4).
+- Give each paragraph only one topic (6.5).
+- Use no more than six sentences per paragraph (6.6).
 
-Give each paragraph one topic, introduced by a topic sentence. Arrange the
-supporting information logically. Use no more than six sentences per paragraph.
+Section 6's introductory guidance distinguishes descriptions from instructions.
 Do not turn descriptive information into commands unless the requested function
 of the text actually changes.
 
 ## Safety instructions — rules 7.1–7.3 and 5.1
 
-Use the applicable risk identifier, such as a warning or caution, under the
-user's governing conventions. Begin with a clear command or a condition the
-reader must understand first. Explain the hazard or possible consequence when
-the information is available. Do not invent or reduce a hazard or its severity.
+- Use the applicable risk identifier, such as a warning or caution, under the
+  user's governing conventions (7.1).
+- Begin with a clear command or a condition the reader must understand first (7.2).
+- Explain the hazard or possible consequence when the information is available (7.3).
 
-Safety sentences have the procedural limit of 20 words. Required safety content
-must not be hidden in a note or removed merely to shorten a sentence.
+Preserve the supplied hazard and severity. Ask about missing technical information;
+do not invent it. These are the skill's meaning-preservation conventions.
+Safety sentences have the procedural limit of 20 words (5.1). Required safety
+content must not be hidden in a note (5.5) or removed merely to shorten a sentence.
 
 ## Punctuation and counting — rules 8.1–8.7
 
@@ -218,13 +224,13 @@ uncertain rather than report a definite violation from a whitespace count.
 ## Meaning and consistency — rules 9.1–9.4
 
 Reconstruct a sentence when a word-for-word replacement would change meaning,
-grammar, or clarity. An ordinary meaning of a word is not necessarily its
-approved STE meaning. Do not extend an approved meaning by analogy.
+grammar, or clarity (9.1). An ordinary meaning of a word is not necessarily its
+approved STE meaning. Do not extend an approved meaning by analogy (9.2).
 
-Do not combine individually approved words into a new idiomatic phrasal verb.
+Do not combine individually approved words into a new idiomatic phrasal verb (9.3).
 Some phrasal verbs have specific dictionary authorization or qualify as technical
 verbs in a particular context; do not claim that all multi-word verbs are banned.
-Keep terminology and wording consistent for repeated items and repeated actions.
+Keep terminology and wording consistent for repeated items and repeated actions (9.4).
 
 ## Additional recommendations — GR-1–GR-8
 
@@ -232,14 +238,14 @@ The source distinguishes these recommendations from its numbered writing rules.
 Do not report a stylistic preference from this group as a separate numbered-rule
 violation without an applicable rule.
 
-- Include “that” where it clarifies the boundary between clauses.
-- Check “with” for ambiguity about association, accompaniment, or a tool.
-- Make pronoun referents explicit. Repeat the noun when “it,” “they,” or “this”
-  could refer to more than one thing.
-- Avoid meanings transferred incorrectly from similar-looking foreign words.
-- Prefer clear English expressions to Latin abbreviations.
-- Use neutral, inclusive wording and respect necessary contextual terminology.
-- Possessive forms are permitted when clear and correct; they are not contractions.
+- Include “that” where it clarifies the boundary between clauses (GR-1).
+- Check “with” for ambiguity about association, accompaniment, or a tool (GR-2).
+- Make pronoun referents explicit; repeat the noun when a pronoun is ambiguous (GR-3).
+- Use “this” with a noun when needed to make its reference clear (GR-4).
+- Avoid meanings transferred incorrectly from similar-looking foreign words (GR-5).
+- Prefer clear English expressions to Latin abbreviations (GR-6).
+- Use neutral, inclusive wording and respect necessary contextual terminology (GR-7).
+- Possessive forms are permitted when clear and correct; they are not contractions (GR-8).
 
 ## Final review
 

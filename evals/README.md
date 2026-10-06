@@ -11,6 +11,8 @@ than testing Python functions. They focus on meaning and operation boundaries:
 | `fixed-labels` | Changing literal interface strings to satisfy spelling or punctuation guidance. |
 | `validate-only` | Rewriting when asked only to assess, or overstating verification. |
 | `clarification-needed` | Resolving an ambiguous referent without evidence. |
+| `description-rule-ids` | Reporting paragraph topics and sentence limits without the individual 6.5 and 6.6 IDs. |
+| `safety-rule-ids` | Guessing safety rule IDs or inventing hazard severity. |
 
 ## Repeat the evaluation
 
@@ -26,7 +28,7 @@ than testing Python functions. They focus on meaning and operation boundaries:
    as its skill instructions and `prompt` as the user request. Do not supply
    expected answers, rubrics, repository context, or previous outputs. Disable
    retrieval and tools after the skill is loaded.
-3. Save the unedited responses. Record the date, exact model/version and settings
+3. Repeat each case in another fresh context. Save the unedited responses. Record the date, exact model/version and settings
    when available, and the skill/case hashes. Do not infer unavailable metadata.
 4. Review each response against every invariant and failure example in
    [`cases.json`](cases.json). Use semantic judgment, not a required answer string.
@@ -45,7 +47,34 @@ For stronger evidence, use multiple independent runs and more than one model.
 Passing these cases does not prove universal meaning preservation, dictionary
 approval, or compliance with every requirement of the standard.
 
-## Recorded smoke evaluation
+## Recorded evaluations
+
+### Fresh contexts and repeated runs
+
+The [fresh-context report](results/2026-10-05-fresh-contexts.json) records two
+repetitions of all eight cases: **16 responses from 16 fresh responding contexts**.
+All 16 passed their stated invariants in the primary assistant's semantic review.
+The responding agents did not see the rubric or one another's outputs.
+
+The report preserves exact responses, skill and case hashes, individual prompt
+hashes, and responding-agent identifiers. Exact backend model/version and sampling
+settings were unavailable and are recorded as null, not inferred. Respondents
+used no retrieval or tools while composing; they saved their completed response
+with a tool afterward. These are manual model evaluations, not Python tests.
+
+The [longer examples](../examples/manifest.json) use separate fresh contexts and
+are reviewed separately. In particular, the export report overstates an
+imperative-form finding about recommendations; its reviewer notes preserve that
+limitation. Passing the smaller cases does not establish correctness on longer
+documents.
+
+The user inspected the earlier recorded responses but did not independently rerun
+the evaluation. That inspection is not counted as another run or human expert
+validation. The new runs were executed by responding agents and graded by the
+primary assistant. Two repetitions with one unknown model configuration do not
+establish cross-model reliability.
+
+### Earlier batched smoke evaluation
 
 The [2026-10-05 report](results/2026-10-05.json) preserves actual responses and
 review decisions for two runs:
@@ -62,5 +91,5 @@ This is assistant-reviewed evidence, not a human expert assessment.
 The two runs had independent contexts, but the six cases **within** each run
 shared one context. Exact model/version and sampling settings were not exposed.
 These constraints limit reproducibility and independence. The procedure above
-recommends fresh contexts per case for future evaluations. No claim is made that
+uses fresh contexts per case, as recorded in the newer report above. No claim is made that
 the Python unit suite automatically runs or reproduces this model evaluation.
